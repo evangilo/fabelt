@@ -24,3 +24,17 @@ def create_database(name, owner=None):
 def drop_database(name):
     with cd('~postgres'):
         sudo('dropdb {name}'.format(name=name), user='postgres')
+
+
+@task()
+def create_user(username):
+	with cd('~postgres'):
+		sudo('createuser {username} -P'.format(username=username),
+			 user='postgres')
+
+
+@task()
+def drop_user(username):
+	with cd('~postgres'):
+		sudo('dropuser {username}'.format(username=username),
+			 user='postgres')
